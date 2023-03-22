@@ -8,5 +8,4 @@ jobs:
 
   ECS:
     runs-on: ubuntu-latest
-    steps:
       
