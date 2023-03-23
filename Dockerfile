@@ -12,4 +12,6 @@ COPY ./main main
 
 RUN chmod +x main
 
+COPY ./templates/ templates/
+
 CMD [ "./main" ]
