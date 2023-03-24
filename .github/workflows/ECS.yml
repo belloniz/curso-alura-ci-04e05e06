@@ -25,3 +25,10 @@ jobs:
         task-definition: task-definition.json
         container-name: go
         image: gabrielbelloni/go_ci:${{ github.ref_name }}
+        environment-variables: |
+          HOST=${{ secrets.DB_HOST }}
+          USER=${{ secrets.DB_USER }}
+          PASSWORD=${{ secrets.DB_PASSWORD }}
+          DBNAME=${{ secrets.DB_NAME }}
+          DBPORT=${{ secrets.DB_PORT }}
+          PORT=8000
