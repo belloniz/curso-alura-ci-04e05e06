@@ -46,10 +46,11 @@ jobs:
         
     - name: Requisicao
       continue-on-error: true
-      run: sleep 30s ; wget http://lb-api-go-542034320.us-east-1.elb.amazonaws.com:8000/gabriel
+      run: echo "REQUEST=0" >> $GITHUB_ENV; sleep 30s ; wget http://lb-api-go-542034320.us-east-1.elb.amazonaws.com:8000/gabriel || echo "REQUEST=1" >> $GITHUB_ENV
       
       
-    - name: Deploy Amazon ECS task definition
+    - name: (Rollback) - Deploy Amazon ECS task definition
+      if: ${{ env.REQUEST != 0 }}
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: task-definition.json.old
