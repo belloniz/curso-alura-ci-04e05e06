@@ -17,4 +17,4 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
     
-    - run: git clone https://github.com/leollo98/Infra_CI 
+    - run: git clone https://github.com/belloniz/infra-ci-curso-alura-05
