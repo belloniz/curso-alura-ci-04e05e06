@@ -64,6 +64,12 @@ jobs:
     uses: ./.github/workflows/ECS.yml
     secrets: inherit
     
+  load-test:
+    needs: docker
+    if: ${{ github.ref_name == 'homolog' }}
+    uses: ./.github/workflows/load-test.yml
+    secrets: inherit
+    
   #Deploy_EC2:
   #  needs: build
   #  uses: ./.github/workflows/EC2.yml
