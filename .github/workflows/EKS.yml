@@ -48,5 +48,7 @@ jobs:
     - run: kubectl create secret generic dbpassword --from-literal=PASSWORD=${{ secrets.DB_PASSWORD }}
     - run: kubectl create secret generic dbname --from-literal=DBNAME=${{ secrets.DB_NAME }}
     - run: kubectl create secret generic port --from-literal=PORT=8000
+    
+    - run: kubectl apply -f curso-alura-infra-06/go.yaml
 
     
