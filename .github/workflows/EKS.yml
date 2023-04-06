@@ -62,4 +62,4 @@ jobs:
     
     - run: kubectl apply -f curso-alura-infra-06/go.yaml
 
-    
+    - run: kubectl set image deployment/go-api go=gabrielbelloni/go_ci:${{ github.run_number }}
