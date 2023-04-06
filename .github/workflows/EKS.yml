@@ -25,8 +25,8 @@ jobs:
     - run: terraform -chdir=curso-alura-infra-06/env/Homolog init
     
     # comando pra destruir a infra e nao gerar custos
-    - run: terraform -chdir=infra-ci-curso-alura-06/env/Homolog destroy -auto-approve
-    - run: return 1
+    #- run: terraform -chdir=infra-ci-curso-alura-06/env/Homolog destroy -auto-approve
+    #- run: return 1
     
     - run: terraform -chdir=curso-alura-infra-06/env/Homolog apply -auto-approve
 
@@ -42,13 +42,24 @@ jobs:
     
     - run: kubectl get svc
     
+    - run: kubectl delete secret dbhost --ignore-not-found
     - run: kubectl create secret generic dbhost --from-literal=HOST=${{ steps.URL.outputs.stdout }}
+    
+    - run: kubectl delete secret dbport --ignore-not-found
     - run: kubectl create secret generic dbport --from-literal=DBPORT=${{ secrets.DB_PORT }}
+    
+    - run: kubectl delete secret dbuser --ignore-not-found
     - run: kubectl create secret generic dbuser --from-literal=USER=${{ secrets.DB_USER }}
+    
+    - run: kubectl delete secret dbpassword --ignore-not-found
     - run: kubectl create secret generic dbpassword --from-literal=PASSWORD=${{ secrets.DB_PASSWORD }}
+    
+    - run: kubectl delete secret dbname --ignore-not-found
     - run: kubectl create secret generic dbname --from-literal=DBNAME=${{ secrets.DB_NAME }}
+    
+    - run: kubectl delete secret port --ignore-not-found
     - run: kubectl create secret generic port --from-literal=PORT=8000
     
     - run: kubectl apply -f curso-alura-infra-06/go.yaml
 
-    
+    - run: kubectl set image deployment/go-api go=gabrielbelloni/go_ci:${{ github.run_number }}
